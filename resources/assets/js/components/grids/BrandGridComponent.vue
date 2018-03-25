@@ -24,20 +24,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="category in categories.data" :key="category.id">
-                    <td>{{category.name}}</td>
-                    <td>{{category.description}}</td>
-                    <td><i :class="getClass(category.active)"></i></td>
+                <tr v-for="brand in brands.data" :key="brand.id">
+                    <td>{{brand.name}}</td>
+                    <td>{{brand.description}}</td>
+                    <td><i :class="getClass(brand.active)"></i></td>
                     <td>
-                        <button class="btn btn-sm btn-primary" @click="editItem(category.id)"><i class="ft-pen"></i> Edit</button>
-                        <button class="btn btn-sm btn-danger" @click="deleteItem(category.id)"><i class="ft-cross"></i> Delete</button>
+                        <button class="btn btn-sm btn-primary" @click="editItem(brand.id)"><i class="ft-pen"></i> Edit</button>
+                        <button class="btn btn-sm btn-danger" @click="deleteItem(brand.id)"><i class="ft-cross"></i> Delete</button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <pagination :data="categories" v-on:pagination-change-page="get"></pagination>
+        <pagination :data="brands" v-on:pagination-change-page="get"></pagination>
         <div class="form-actions text-right col-md-12">
-            <button @click="closeModal()" v-show="closebutton" type="button" class="btn btn-default">Close</button>
+            <button @click="closeModal()" v-if="closebutton" type="button" class="btn btn-default">Close</button>
         </div>
     </div>
 </template>
@@ -47,8 +47,8 @@
         props: ['modal', 'closebutton'],
         data() {
             return {
-                categories: {},
-                category: {},
+                brands: {},
+                brand: {},
                 message: null,
                 searchPerm: ''
             }
@@ -63,16 +63,16 @@
                     perm = '---nothing---'
                 }
 
-                axios.get('api/category/all/ ' + perm + '?page=' + page)
+                axios.get('api/brand/all/ ' + perm + '?page=' + page)
                 .then((res) => {
-                    this.categories = res.data  
+                    this.brands = res.data  
                 })
                 .catch((err) => {
 
                 })
             },
             deleteItem(id) {
-                axios.get('api/category/destroy/' + id)
+                axios.get('api/brand/destroy/' + id)
                 .then((res) => {
                     this.message = res.data
                     this.get()
@@ -83,9 +83,9 @@
             },
             editItem(id){
                 Event.fire('openmodal', this.modal)
-                axios.get('api/category/find/' + id)
+                axios.get('api/brand/find/' + id)
                 .then((res) => {
-                    Event.fire('editcategory', res.data)  
+                    Event.fire('editbrand', res.data)  
                     this.closeModal()
                 })
                 .catch((err) => {
@@ -106,7 +106,7 @@
         },
         created() {
             this.get()
-            Event.listen('categoryadded', () => {
+            Event.listen('brandadded', () => {
                 this.get()
             })
         }

@@ -10,7 +10,6 @@ class CategoryController extends Controller
 {
     public function store(Request $request)
     {
-        // dd($request->all());
         Category::create($request->all());
         return [
             'title' => 'Success!',
@@ -20,7 +19,9 @@ class CategoryController extends Controller
 
     public function getAll($searchPerm = "")
     {
-        return Category::orderByDesc('id')->paginate(20);
+        return trim($searchPerm) == '---nothing---' ? 
+        Category::orderByDesc('id')->paginate(20) : 
+        Category::orderByDesc('id')->search($searchPerm)->paginate(20);
     }
 
     public function find(Category $category)

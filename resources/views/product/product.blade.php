@@ -24,7 +24,7 @@
                                   </div>
 
                                   <div class="card-body">
-                                      jaslkdfjlksajdf
+                                      <test-component></test-component>
                                   </div>
                               </div>
                           </div>

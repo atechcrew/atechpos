@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Category;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,3 +26,14 @@ Route::get('category/all/{searchPerm?}', 'API\CategoryController@getAll');
 Route::get('category/find/{category}', 'API\CategoryController@find');
 Route::post('category/update/{category}', 'API\CategoryController@update');
 Route::get('category/destroy/{category}', 'API\CategoryController@destroy');
+
+
+Route::post('brand/store', 'API\BrandController@store');
+Route::get('brand/all/{searchPerm?}', 'API\BrandController@getAll');
+Route::get('brand/find/{brand}', 'API\BrandController@find');
+Route::post('brand/update/{brand}', 'API\BrandController@update');
+Route::get('brand/destroy/{brand}', 'API\BrandController@destroy');
+
+Route::get('test', function(){
+    return Category::all();
+});

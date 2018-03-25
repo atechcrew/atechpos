@@ -1,7 +1,7 @@
 let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css');
+    // .sass('resources/assets/sass/app.scss', 'public/css');
 
 mix.babel([
     'resources/assets/theme/app-assets/vendors/js/vendors.min.js',
@@ -23,7 +23,6 @@ mix.styles([
     'resources/assets/theme/app-assets/css/core/menu/menu-types/vertical-menu.css',
     'resources/assets/theme/app-assets/css/core/colors/palette-gradient.css',
     'resources/assets/theme/app-assets/vendors/css/forms/selects/select2.css',
-    'resources/assets/theme/app-assets/css/bootstrap-extended.css',
     'resources/assets/theme/custom.css'
 ], 'public/app-assets/css/all.css')
 

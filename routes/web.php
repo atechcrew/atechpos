@@ -13,3 +13,4 @@
 
 Route::get('product', function() { return view('product.product'); });
 Route::get('category', function() { return view('product.category'); });
+Route::get('brand', function() { return view('product.brand'); });

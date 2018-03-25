@@ -30,6 +30,21 @@ Vue.component(
     require('./components/grids/CategoryGridComponent.vue')
 );
 
+Vue.component(
+    'product-grid-component',
+    require('./components/grids/ProductGridComponent.vue')
+);
+
+Vue.component(
+    'brand-grid-component',
+    require('./components/grids/BrandGridComponent.vue')
+);
+
+Vue.component(
+    'brand-form-component',
+    require('./components/forms/BrandFormComponent.vue')
+);
+
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 const app = new Vue({

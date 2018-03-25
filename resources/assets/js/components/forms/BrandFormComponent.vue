@@ -10,18 +10,18 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 mb-12">
                     <fieldset class="form-group">
                         <label>Name</label>
-                        <input v-model="category.name" name="name" type="text" class="form-control">
+                        <input v-model="brand.name" name="name" type="text" class="form-control">
                         <small class="text-danger error" v-text="getError('name')"></small>
                     </fieldset>
                     <fieldset class="form-group">
                         <label>Description</label>
-                        <textarea v-model="category.description" name="description" type="text" class="form-control"></textarea>
+                        <textarea v-model="brand.description" name="description" type="text" class="form-control"></textarea>
                         <small class="text-danger error" v-text="getError('description')"></small>
                     </fieldset>
                     <fieldset class="form-group">
                         <label>Active</label>
                         <input type="hidden" name="active" value="0">
-                        <input type="checkbox" true-value="1" false-value="0" :checked="category.active" value="1" name="active" v-model="category.active"  />
+                        <input type="checkbox" true-value="1" false-value="0" :checked="brand.active" value="1" name="active" v-model="brand.active"  />
                     </fieldset>
                 </div>
                 <div class="form-actions text-right col-md-12">
@@ -40,7 +40,7 @@
         props: ['savebutton', 'updatebutton', 'closebutton', 'modal', 'formid'],
         data() {
             return {
-                category: {active: 1},
+                brand: {active: 1},
                 errors: {},
                 message: null,
                 updatemode: false
@@ -50,12 +50,12 @@
             save(){
                 var form = $('#' + this.formid)[0];
                 var data = new FormData(form);
-                axios.post('api/category/store', data)
+                axios.post('api/brand/store', data)
                 .then((res) => {
                     this.message = res.data
                     this.updatemode = false
-                    this.category = {}
-                    Event.fire('categoryadded')
+                    this.brand = {}
+                    Event.fire('brandadded')
                 })
                 .catch((err) => {
                     this.errors = err.response.data
@@ -64,19 +64,19 @@
             update(){
                 var form = $('#' + this.formid)[0];
                 var data = new FormData(form);
-                axios.post('api/category/update/' + this.category.id, data)
+                axios.post('api/brand/update/' + this.brand.id, data)
                 .then((res) => {
                     this.message = res.data
                     this.updatemode = false
-                    this.category = {active: 1}
-                    Event.fire('categoryadded')
+                    this.brand = {active: 1}
+                    Event.fire('brandadded')
                 })
                 .catch((err) => {
                     this.errors = err.response.data
                 })
             },
             clear() {
-                this.category = {active: 1}
+                this.brand = {active: 1}
                 this.updatemode = false
                 this.message = null
             },
@@ -89,8 +89,8 @@
             }
         },
         created() {
-            Event.listen('editcategory', (data) => {
-                this.category = data
+            Event.listen('editbrand', (data) => {
+                this.brand = data
                 this.updatemode = true
             })
         }
